@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="../assets/signup-style.css">
+<div class="signup-div">
+    <h1>SIGNUP</h1>
+    <form action="/" method="POST">
+        <input type="text" name="name" id="name" placeholder="name" class="signup-inp">
+        <input type="password" name="pass" id="pass" placeholder="password" class="signup-inp">
+        <button type="submit" onclick="savedata()">SIGNUP</button>
+    </form>
+    <a href="login.ejs">LOG IN</a>
+</div>
+<script>
+    function savedata(){
+        let name, pass;
+        
+        name= document.getElementById("name").value;
+        pass= document.getElementById("pass").value;
+        
+        let records= new Array();
+        records=JSON.parse(localStorage.getItem("user"))?JSON.parse(localStorage.getItem("user")):[];
+        records.push({
+            "name":name,
+            "pass":pass
+        })
+
+        localStorage.setItem("user",JSON.stringify(records));
+    }
+
+
+
+</script>

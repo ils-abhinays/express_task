@@ -1,10 +1,13 @@
 import express from 'express'
 import route from './routes/routes.js';
 
+
+// const encoder = bodyParser.urlencoded();
+
 const application = express()
 const port = '8001';
-
-// const staticpath = path.join(__dirname,"../static");
+application.set('view-engine', 'ejs')
+application.use("/assets",express.static("assets"))
 
 application.use('/',route);
 
