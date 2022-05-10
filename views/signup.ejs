@@ -1,14 +1,16 @@
 <link rel="stylesheet" href="../assets/signup-style.css">
 <div class="signup-div">
     <h1>SIGNUP</h1>
-    <form action="/" method="POST">
+    <form action="/person" method="post">
         <input type="text" name="name" id="name" placeholder="name" class="signup-inp">
         <input type="password" name="pass" id="pass" placeholder="password" class="signup-inp">
         <button type="submit" onclick="savedata()">SIGNUP</button>
     </form>
-    <a href="login.ejs">LOG IN</a>
+    <a href="login">LOG IN</a>
 </div>
-<script>
+
+
+<!-- <script>
     function savedata(){
         let name, pass;
         
@@ -24,7 +26,4 @@
 
         localStorage.setItem("user",JSON.stringify(records));
     }
-
-
-
-</script>
+</script> -->

@@ -7,18 +7,22 @@ const __dirname=resolve();
 // router.use(logger)
 
 router.get("/",(req,res)=>{
-  res.send("this is a home page");
+  res.render('index.ejs');
 })
 router.get("/signup", mware, (req,res)=>{
-    // res.send()
-    res.render('index.ejs');
+  res.render('signup.ejs');
   console.log("signup")
-
 })
 
 router.get("/login",(req,res)=>{
-  // res.send()
   res.render('login.ejs', {name:'abhi'});
+})
+
+router.get("/person",(req,res)=>{
+  let pn= req.query.name;
+  let pass= req.query.pass;
+
+  res.send("<h1>Hello this is get request and your name is " + pn + " and your password is " + pass + "</h1>");
 })
 
 router.get("/other",(req,res)=>{
