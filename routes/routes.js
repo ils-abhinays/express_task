@@ -18,10 +18,13 @@ router.get("/login",(req,res)=>{
   res.render('login.ejs', {name:'abhi'});
 })
 
+router.get("/dashboard",(req,res)=>{
+  res.render('dashboard.pug', {partial:'partials data'});
+})
+
 router.get("/person",(req,res)=>{
   let pn= req.query.name;
   let pass= req.query.pass;
-
   res.send("<h1>Hello this is get request and your name is " + pn + " and your password is " + pass + "</h1>");
 })
 
