@@ -1,12 +1,11 @@
 import express from 'express'
 import path, {resolve} from 'path'
 import j_data from '../data/jsondata.js'
+import { putrq, delrq, postrq } from '../controllers/controller.js'
 
-// import ejs from ejs
 
 const router = express.Router()
 const __dirname=resolve();
-// router.use(logger)
 router.use(express.json())
 
 router.get("/",(req,res)=>{
@@ -41,64 +40,11 @@ router.get("/jsondata",(req,res)=>{
   res.json(j_data)
 })
 
-router.post("/postrq",(req,res)=>{
-  // res.render('login.ejs', {name:'abhi'});
-  res.send("this is the post request")
-  console.log(req.body);
+router.post("/crud",postrq)
 
-  const user = {
-    id: j_data.length+1,
-    password: req.body.pass,
-    name: req.body.name,
-    email: req.body.email
-  }
+router.put("/crud/:id", putrq)
 
-    j_data.push(user);
-    res.json(user);
-})
-
-router.put("/putrq/:id",(req,res)=>{
-  res.send("this is the put request")
-  
-  let id = req.params.id
-  let password = req.body.password
-  let name = req.body.name
-  let email = req.body.email
-  
-  let index = j_data.findIndex((student)=>{
-      return (student.id==Number.parseInt(id))
-  })
-
-  if(index > 0){
-    let std = j_data[index]
-    std.password = password
-    std.name= name
-    std.email = email
-
-    j_data.push(user);
-    res.json(user);
-}
-})
-
-router.delete("/delrq/:id",(req,res)=>{
-  res.send("this is the delete request")
-  
-  let id = req.params.id
-  let password = req.body.password
-  let name = req.body.name
-  let email = req.body.email
-  
-  let index = j_data.findIndex((student)=>{
-      return (student.id==Number.parseInt(id))
-  })
-
-  if(index > 0){
-    let std = j_data[index]
-    j_data.splice(index, 1)
-
-    res.json(std);
-}
-})
+router.delete("/crud/:id",delrq)
 // -----------------------------------------------
 router.all('*', (req, res)=>{
 res.status(404).send('<h1>404 page not found!</h1>')
