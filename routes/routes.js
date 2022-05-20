@@ -1,7 +1,7 @@
 import express from 'express'
 import path, {resolve} from 'path'
 import j_data from '../data/jsondata.js'
-import { putrq, delrq, postrq } from '../controllers/controller.js'
+import { putrq, delrq, postrq, jwtauth, authtoken} from '../controllers/controller.js'
 
 
 const router = express.Router()
@@ -16,9 +16,11 @@ router.get("/signup", mware, (req,res)=>{
   console.log("signup")
 })
 
-router.post("/login",(req,res)=>{
-  res.render('login.ejs', {name:'abhi'});
-})
+// router.post("/login",(req,res)=>{
+//   res.render('login.ejs', {name:'abhi'});
+// })
+
+router.post("/login", jwtauth)
 
 
 
@@ -26,18 +28,19 @@ router.get("/dashboard",(req,res)=>{
   res.render('dashboard.pug', {partial:'partials data'});
 })
 
-router.get("/person",(req,res)=>{
+router.post("/person",(req,res)=>{
   let pn= req.query.name;
   let pass= req.query.pass;
-  res.send("<h1>Hello this is get request and your name is " + pn + " and your password is " + pass + "</h1>");
+  res.send("<h1>Hello this is post request and your name is " + pn + " and your password is " + pass + "</h1>");
 })
 
 router.get("/other",(req,res)=>{
   res.sendFile(path.join(__dirname,'/public/index.html'));
 })
 
-router.get("/jsondata",(req,res)=>{
-  res.json(j_data)
+router.get("/jsondata", authtoken, (req,res)=>{
+  res.json(j_data.filter(post => post.name === req.user.name))
+  // res.json(j_data)
 })
 
 router.post("/crud",postrq)

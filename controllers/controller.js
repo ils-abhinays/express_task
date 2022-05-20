@@ -1,6 +1,10 @@
+// import env from 'dotenv'
+import {} from 'dotenv/config'
 import j_data from '../data/jsondata.js'
 import authschema from '../validation/valid_schema.js'
+import jwt from 'jsonwebtoken'
 
+// env.config()
 
 let postrq = (req,res)=>{
     res.send("this is the post request")
@@ -63,4 +67,26 @@ let delrq = (req,res) => {
   }
   }
 
-export {putrq, delrq, postrq}
+  let jwtauth = (req,res)=>{
+    const name = req.body.name
+    const user = { name: name }
+
+    const accesstoken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+    res.json( {accesstoken: accesstoken})
+
+  }
+
+  function authtoken(req, res, next){
+    const authheader = req.headers['authorization']
+    const token = authheader && authheader.split(' ')[1]
+    if(token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=>{
+      if (err) return res.sendStatus(403)
+      req.user = user
+      next()
+    })
+
+  }
+
+export {putrq, delrq, postrq, jwtauth, authtoken}
