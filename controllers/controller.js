@@ -1,7 +1,7 @@
 // import env from 'dotenv'
 import {} from 'dotenv/config'
 import j_data from '../data/jsondata.js'
-import authschema from '../validation/valid_schema.js'
+import authschema from '../model/userschema.js'
 import jwt from 'jsonwebtoken'
 
 // env.config()
@@ -16,14 +16,17 @@ let postrq = (req,res)=>{
       name: req.body.name,
       email: req.body.email
     }
-  
+     
     const result = authschema.validateAsync(req.body)
     console.log(result)
+
+    j_data.push(user);
     // if(result){
         // res.send("done")
         // res.send(result)
     // }
 }
+
 let putrq= (req,res) => {
     res.send("this is the put request")
     

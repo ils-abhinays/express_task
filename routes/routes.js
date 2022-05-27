@@ -11,6 +11,11 @@ router.use(express.json())
 router.get("/",(req,res)=>{
   res.render('index.ejs');
 })
+
+router.get("/getdata",(req,res)=>{
+  res.json(j_data);
+})
+
 router.get("/signup", mware, (req,res)=>{
   res.render('signup.ejs');
   console.log("signup")
