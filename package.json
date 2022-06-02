@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test" : "mocha testing",
+    "coverage" : " nyc npm run test"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,9 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0"
   }
 }
