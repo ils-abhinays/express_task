@@ -7,8 +7,9 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test" : "mocha testing",
-    "coverage" : " nyc npm run test"
+    "coverage" : "nyc npm run test"
   },
+  
   "author": "",
   "license": "ISC",
   "type": "module",
